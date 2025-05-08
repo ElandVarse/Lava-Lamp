@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Lava Lamp CSS</title>
+    <style>
+        body {
+            background: black;
+            overflow: hidden;
+            margin: 0 400px;
+        }
+
+        .blob {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle at 30% 30%, #ff4d4d, #ff0000 70%);
+            border-radius: 50%;
+            filter: blur(20px);
+            mix-blend-mode: screen;
+            opacity: 0;
+            /* começa invisível */
+            bottom: -100px;
+
+            animation:
+                rise 15s linear infinite,
+                wobble 15s ease-in-out infinite,
+                colorShift 30s linear infinite;
+            animation-fill-mode: both;
+        }
+
+
+        @keyframes colorShift {
+            0% {
+                filter: blur(20px) hue-rotate(0deg);
+            }
+
+            100% {
+                filter: blur(20px) hue-rotate(360deg);
+            }
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(0) scale(1.2);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(-50vh) scale(0.6);
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-120vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        const numBlobs = 10; // quantidade de bolhas
+        for (let i = 0; i < numBlobs; i++) {
+            const blob = document.createElement('div');
+            blob.className = 'blob';
+
+            // posição horizontal aleatória (0 a 100vw)
+            const left = Math.random() * 100;
+            blob.style.left = `${left}vw`;
+
+            // atraso aleatório (0 a 15s)
+            const delay = Math.random() * 15;
+            blob.style.animationDelay = `${delay}s, ${delay}s`;
+
+            document.body.appendChild(blob);
+        }
+    </script>
+
+</body>
+
+</html>
